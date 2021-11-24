@@ -1,10 +1,9 @@
-import { Container, Title, Input } from './styles'
+import { Container, Title } from './styles'
 
 function Header() {
 	return (
 		<Container>
 			<Title>MyContacts</Title>
-			<Input type='text' placeholder='Procure um contato...' />
 		</Container>
 	)
 }

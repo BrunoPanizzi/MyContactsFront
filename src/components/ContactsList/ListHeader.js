@@ -1,17 +1,23 @@
-import React from 'react'
-
-import { HeaderContainer, ContactsCount, NewContactButton } from './styles'
+import { 
+	Flex, 
+	ContactsCount, 
+	NewContact,
+	SearchInput
+} from './styles'
 
 function ListHeader() {
 	return (
-		<HeaderContainer>
-			<ContactsCount>
-				{18} contatos	
-			</ContactsCount>
-			<NewContactButton>
-				Novo Contato
-			</NewContactButton>
-		</HeaderContainer>
+		<>
+			<SearchInput placeholder='Procure um contato...' />
+			<Flex>
+				<ContactsCount>
+					{18} contatos
+				</ContactsCount>
+				<NewContact href='/new'>
+					Novo Contato
+				</NewContact>
+			</Flex>
+		</>
 	)
 }
 

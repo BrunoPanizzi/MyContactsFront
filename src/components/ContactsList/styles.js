@@ -1,30 +1,51 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
-	margin-top: 2rem;
-`
-
-export const HeaderContainer = styled.header`
-	width: 100%;
+export const Flex = styled.div`
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 1rem;
+`
+
+export const SearchInput = styled.input`
+	width: 100%;
+	height: 2.5rem;
+	margin-bottom: 1.5rem;
+	background: ${({ theme }) => theme.colors.background};
+	color: ${({ theme }) => theme.text.light};
+	border: none;
+	outline: none;
+	padding: 0 .8rem;
+	border-radius: ${({ theme }) => theme.bigBorderRadius};
+	box-shadow: 0 .2rem 0.8rem rgba(0,0,0,0.1);
+	transition: 300ms;
+
+	::placeholder {
+		color: ${({ theme }) => theme.text.light};
+	}
+
+	:focus-within, :hover {
+		box-shadow: 0 .4rem 1rem rgba(0, 0, 0, 0.15);
+		color: ${({ theme }) => theme.text.main};
+		::placeholder {
+			color: ${({ theme }) => theme.text.main};
+		}
+	}
 `
 
 export const ContactsCount = styled.span`
 	font-size: 1.2rem;
 `
 
-export const NewContactButton = styled.button`
-	font-size: 1.2rem;
+export const NewContact = styled.a`
+	font-size: 1.1rem;
 	background: ${({ theme }) => theme.colors.background};	
 	color: ${({ theme }) => theme.colors.main};
 	border: 2px solid ${({ theme }) => theme.colors.main};
 	border-radius: ${({ theme }) => theme.borderRadius};
 	padding: .2em .5em;
 	outline: none;
+	text-decoration: none;
 	transition: 200ms;
 
 	:focus-visible, :hover {

@@ -14,7 +14,7 @@ export default createGlobalStyle`
 		background: ${({ theme }) => theme.colors.background};
 	}
 
-	button {
+	button, a {
 		cursor: pointer;
 		border: none;
 		background-color: ${({ theme }) => theme.colors.background};
