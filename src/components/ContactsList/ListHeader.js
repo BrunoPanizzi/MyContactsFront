@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom'
+
 import { 
-	Flex, 
-	ContactsCount, 
-	NewContact,
-	SearchInput
+	SearchInput,
+	Flex
 } from './styles'
 
 function ListHeader() {
@@ -10,12 +10,8 @@ function ListHeader() {
 		<>
 			<SearchInput placeholder='Procure um contato...' />
 			<Flex>
-				<ContactsCount>
-					{18} contatos
-				</ContactsCount>
-				<NewContact href='/new'>
-					Novo Contato
-				</NewContact>
+				<span>{18} contatos</span>
+				<Link to='/new' >Novo Contato</Link>
 			</Flex>
 		</>
 	)

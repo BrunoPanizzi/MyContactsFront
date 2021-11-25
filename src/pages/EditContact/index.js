@@ -1,10 +1,11 @@
-import React from 'react'
+import PageHeader from '../../components/PageHeader'
 
 function EditContact() {
   return (
-    <div>
+    <>
+      <PageHeader title='Editar contato' />
       edit page
-    </div>
+    </>
   )
 }
 

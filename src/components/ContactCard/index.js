@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import edit from '../../assets/images/edit.svg'
 import trash from '../../assets/images/trash.svg'
 
@@ -15,10 +17,10 @@ function ContactCard() {
 				<p>  roberto.gmail.com </p>
 			</Info>
 			<Icons>
-				<button>
+				<Link to='/edit/placeholder'>
 					<img src={edit} alt='trash icon' />
-				</button>
-				<button>
+				</Link>
+				<button onClick={() => alert('dlete')}>
 					<img src={trash} alt='trash icon' />
 				</button>
 			</Icons>

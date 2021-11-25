@@ -1,10 +1,11 @@
-import React from 'react'
+import PageHeader from '../../components/PageHeader'
 
 function NewContact() {
   return (
-    <div>
-      neew contact
-    </div>
+    <>
+      <PageHeader title='Novo contato' />
+      new contact
+    </>
   )
 }
 

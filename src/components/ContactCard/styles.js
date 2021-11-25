@@ -19,7 +19,7 @@ export const Info = styled.div`
 		h2 {
 			font-size: 1.3rem;
 			font-family: ${({ theme }) => theme.text.fancyFont};
-			font-weight: 400;
+			font-weight: bold;
 			margin-bottom: .2rem;
 			margin-right: .4rem;
 		}
@@ -39,7 +39,10 @@ export const Info = styled.div`
 `
 
 export const Icons = styled.div`
-	button {
+	display: flex;
+	
+	button, a {
+		display: block;
 		margin-left: .75rem;
 		transition: 200ms;
 		:hover {
