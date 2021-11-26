@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  background: ${({ theme }) => theme.colors.veryLight};
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -42,6 +43,7 @@ export const Icons = styled.div`
 	display: flex;
 	
 	button, a {
+		background: ${({ theme }) => theme.colors.veryLight};
 		display: block;
 		margin-left: .75rem;
 		transition: 200ms;

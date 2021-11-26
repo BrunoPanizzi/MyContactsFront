@@ -4,13 +4,13 @@ export const SearchInput = styled.input`
 	width: 100%;
 	height: 2.5rem;
 	margin-bottom: 1.5rem;
-	background: ${({ theme }) => theme.colors.background};
+	background: ${({ theme }) => theme.colors.veryLight};
 	color: ${({ theme }) => theme.text.light};
 	border: none;
 	outline: none;
 	padding: 0 .8rem;
 	border-radius: ${({ theme }) => theme.bigBorderRadius};
-	box-shadow: 0 .2rem 0.8rem rgba(0,0,0,0.1);
+	box-shadow: 0 .2rem 0.6rem rgba(0,0,0,0.1);
 	transition: 300ms;
 	
 	::placeholder {
