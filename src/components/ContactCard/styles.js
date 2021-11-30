@@ -26,11 +26,11 @@ export const Info = styled.div`
 		}
 
 		span {
-			background: ${({ theme }) => theme.colors.light};
+			background: ${({ theme }) => theme.colors.primary[200]};
 			padding: .2rem .4rem;
 			border-radius: ${({ theme }) => theme.borderRadius};
 			font-size: .8rem;
-			color: ${({ theme }) => theme.colors.main}
+			color: ${({ theme }) => theme.colors.primary.main}
 		}
 	}
 	p {

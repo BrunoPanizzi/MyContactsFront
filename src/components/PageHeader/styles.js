@@ -5,7 +5,7 @@ export const Container = styled.header`
   a {
     display: flex;
     align-items: center;
-    color: ${({ theme }) => theme.colors.main};
+    color: ${({ theme }) => theme.colors.primary.main};
     text-decoration: none;
     margin-bottom: .5rem;
     outline: none;

@@ -9,7 +9,7 @@ export const Title = styled.h1`
 	font-family: ${({ theme }) => theme.text.fancyFont};
 	font-weight: 700;
 	font-size: 3rem;
-	background: linear-gradient(45deg, ${({ theme }) => theme.colors.main}, ${({ theme }) => theme.colors.veryDark});
+	background: linear-gradient(45deg, ${({ theme }) => theme.colors.primary.main}, ${({ theme }) => theme.colors.primary[900]});
 	background-clip: text;
 	-webkit-background-clip: text;
 	color: transparent;	

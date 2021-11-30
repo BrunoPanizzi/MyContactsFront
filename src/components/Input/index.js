@@ -14,10 +14,10 @@ export default styled.input`
   transition: 200ms;
 
   :hover {
-    border-color: ${({ theme }) => theme.colors.light};
+    border-color: ${({ theme }) => theme.colors.primary[300]};
   }
   :focus {
-    border-color: ${({ theme }) => theme.colors.main};
+    border-color: ${({ theme }) => theme.colors.primary.main};
     box-shadow: 0 .2rem .8rem rgba(0,0,0, 0.1);
   }
 `

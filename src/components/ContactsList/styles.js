@@ -39,8 +39,8 @@ export const Flex = styled.div`
 	a {	
 		font-size: 1.1rem;
 		background: ${({ theme }) => theme.colors.background};	
-		color: ${({ theme }) => theme.colors.main};
-		border: 2px solid ${({ theme }) => theme.colors.main};
+		color: ${({ theme }) => theme.colors.primary.main};
+		border: 2px solid ${({ theme }) => theme.colors.primary.main};
 		border-radius: ${({ theme }) => theme.borderRadius};
 		padding: .2em .5em;
 		outline: none;
@@ -48,7 +48,7 @@ export const Flex = styled.div`
 		transition: 200ms;
 	
 		:focus-visible, :hover {
-			background: ${({ theme }) => theme.colors.main};
+			background: ${({ theme }) => theme.colors.primary.main};
 			color: ${({ theme }) => theme.colors.background};
 			transform: scale(1.05);
 		}
@@ -59,5 +59,5 @@ export const ListOrderButton = styled.button`
 	display: flex;
 	font-size: 1rem;
 	background:	${({ theme }) => theme.colors.background};
-	color: ${({ theme }) => theme.colors.main};
+	color: ${({ theme }) => theme.colors.primary.main};
 `
