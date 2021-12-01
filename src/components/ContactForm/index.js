@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types'
+
 import Input from '../Input'
 import Select from '../Select'
 import Button from '../Button'
 
-function ContactForm() {
+function ContactForm({ buttonLabel }) {
 	return (
 		<form>
 			<Input
@@ -26,12 +28,16 @@ function ContactForm() {
 				<option>option</option>
 			</Select>
 
-			<Button>
-				Butão
+			<Button type='submit'>
+				{buttonLabel}
 			</Button>
 		
 		</form>
 	)
+}
+
+ContactForm.propTypes = {
+	buttonLabel: PropTypes.string.isRequired
 }
 
 export default ContactForm

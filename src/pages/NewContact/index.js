@@ -6,7 +6,7 @@ function NewContact() {
     <>
       <PageHeader title='Novo contato' />
       
-      <ContactForm />
+      <ContactForm buttonLabel='Criar contato' />
     </>
   )
 }

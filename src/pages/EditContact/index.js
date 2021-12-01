@@ -6,7 +6,7 @@ function EditContact() {
     <>
       <PageHeader title='Editar contato' />
       
-      <ContactForm />
+      <ContactForm buttonLabel='Salvar alterações' />
     </>
   )
 }
