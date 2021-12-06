@@ -24,6 +24,6 @@ export default {
 		light: '#696969',
 		main: '#141414'
 	},
-	borderRadius: '.5rem',
-	bigBorderRadius: '1rem',
+	borderRadius: '8px',
+	bigBorderRadius: '16px',
 }

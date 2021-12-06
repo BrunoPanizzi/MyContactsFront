@@ -5,11 +5,6 @@ const fadeIn = keyframes`
 	to { opacity: 1 }
 `
 
-const fadeOut = keyframes`
-	from { opacity: 1 }
-	to { opacity: 0 }
-`
-
 export const Background = styled.div`
 	position: absolute;
 	inset: 0;
@@ -56,8 +51,8 @@ export const Container = styled.div`
 		color: ${({ theme }) => theme.colors.veryLight};		
 		border: 2px solid ${({ theme }) => theme.colors.danger.main};
 
-		:focus-within {
-			transform: scale(1.1);
+		:hover {
+			transform: scale(1.05);
 		}
 	}
 `

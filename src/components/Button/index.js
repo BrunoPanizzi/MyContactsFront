@@ -19,7 +19,7 @@ export default styled.button`
   }
 
   &[disabled] {
-    background: #ccc;
+    background: #aaa;
     cursor: not-allowed
   }
 `
