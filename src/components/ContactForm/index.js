@@ -6,6 +6,9 @@ import Input from '../Input'
 import Select from '../Select'
 import Button from '../Button'
 
+import isValidEmail from '../../utils/isValidEmail'
+import formatPhone from '../../utils/formatPhone'
+
 function ContactForm({ buttonLabel }) {
 
 	const [name, setName] = useState('')
@@ -13,24 +16,33 @@ function ContactForm({ buttonLabel }) {
 	const [phone, setPhone] = useState('')
 	const [category, setCategory] = useState('')
 
-	const [nameError, setNameError] = useState(false)
-	const [emailError, setEmailError] = useState(false)
+	const [nameError, setNameError] = useState({ error: false, message: 'Nome é obrigatório'})
+	const [emailError, setEmailError] = useState({ error: false, message: 'Email é obrigatório'})
+
+	const isFormValid = (name && email && !nameError.error && !emailError.error)
 
 	const handleNameChange = (e) => {
 		setName(e.target.value)
-		setNameError(false)
+		setNameError(prevError => ({ ...prevError, error: false }))
 		if (! e.target.value) {
-			setNameError(true)
+			setNameError(prevError => ({ ...prevError, error: true }))
 		}
 	}
 
 	const handleEmailChange = (e) => {
-		setEmail(e.target.value)
-		setEmailError(false)
-		if (! e.target.value) {
-			setEmailError(true)
+		const email = e.target.value
+		setEmail(email)
+		setEmailError(prevError => ({...prevError, error: false}))
+		if (! email) {
+			setEmailError({ error: true, message: 'Email é obrigatório' })
+		} else if (! isValidEmail(email)) {
+			setEmailError({ error: true, message: 'Email inválido' })
 		}
 	} 
+	
+	const handlePhoneChange = (e) => {
+		setPhone(formatPhone(e.target.value))
+	}
 	
 	const handleSubmit = (e) => {
 		e.preventDefault()
@@ -39,29 +51,29 @@ function ContactForm({ buttonLabel }) {
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} noValidate>
 			<ErrorContainer
-				error={nameError}
-				errorMessage={'Nome é obrigatório'}
+				error={nameError.error}
+				errorMessage={nameError.message}
 			>
 				<Input
 					placeholder='Nome...'
 					type='text'
 					value={name}
-					error={nameError}
+					error={nameError.error}
 					onChange={handleNameChange}
 				/>
 			</ErrorContainer>
 
 			<ErrorContainer
-				error={emailError}
-				errorMessage={'Email é obrigatório'}
+				error={emailError.error}
+				errorMessage={emailError.message}
 			>
 				<Input
-					type='text'
+					type='email'
 					placeholder='Email...'
 					value={email}
-					error={emailError}
+					error={emailError.error}
 					onChange={handleEmailChange}
 				/>
 			</ErrorContainer>
@@ -70,10 +82,11 @@ function ContactForm({ buttonLabel }) {
 				error={false}
 			>
 				<Input
-					type='text'
+					type='tel'
 					placeholder='Telefone...'
 					value={phone}
-					onChange={(e) => setPhone(e.target.value)}
+					onChange={handlePhoneChange}
+					maxLength={15}
 				/>
 			</ErrorContainer>
 
@@ -93,7 +106,7 @@ function ContactForm({ buttonLabel }) {
 
 			<Button 
 				type='submit'
-				disabled={false}
+				disabled={!isFormValid}
 			>
 				{buttonLabel}
 			</Button>
