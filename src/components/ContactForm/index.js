@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'	
 
+import isValidEmail from '../../utils/isValidEmail'
+import formatPhone from '../../utils/formatPhone'
+
 import ErrorContainer from '../ErrorContainer'
 import Input from '../Input'
 import Select from '../Select'
 import Button from '../Button'
-
-import isValidEmail from '../../utils/isValidEmail'
-import formatPhone from '../../utils/formatPhone'
+import Loader from '../Loader'
 
 function ContactForm({ buttonLabel }) {
 
