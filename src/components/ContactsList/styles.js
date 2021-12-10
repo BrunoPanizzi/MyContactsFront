@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 export const SearchInput = styled.input`
 	width: 100%;
@@ -60,4 +61,8 @@ export const ListOrderButton = styled.button`
 	font-size: 1rem;
 	background:	${({ theme }) => theme.colors.background};
 	color: ${({ theme }) => theme.colors.primary.main};
+
+	img {
+		transition: 200ms;
+	}
 `
