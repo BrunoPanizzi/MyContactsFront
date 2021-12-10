@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
+import formatPhone from '../../utils/formatPhone'
+
+import { Container, Info, Icons } from './styles'
 
 import edit from '../../assets/images/edit.svg'
 import trash from '../../assets/images/trash.svg'
 
-import { Container, Info, Icons } from './styles'
-
 import Modal from '../Modal'
 
-function ContactCard() {
+
+function ContactCard({ id, name, email, phone, category }) {
 
 	const [modal, setModal] = useState(false)
 
@@ -21,11 +25,11 @@ function ContactCard() {
 			{modal && <Modal onClose={handleToggleModal} />}
 			<Info>
 				<div>
-					<h2> Roberto </h2>
-					<span>Categoria</span>
+					<h2>{name}</h2>
+					{category && <span>{category}</span>}
 				</div>
-				<p>  51-99999-9999 </p>
-				<p>  roberto.gmail.com </p>
+				{phone && <p>{formatPhone(phone.toString())}</p>}
+				<p>{email}</p>
 			</Info>
 
 			<Icons>
@@ -42,6 +46,14 @@ function ContactCard() {
 		
 		</Container>
 	)
+}
+
+ContactCard.propTypes = {
+	id: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	email: PropTypes.string.isRequired,
+	phone: PropTypes.oneOfType([ PropTypes.string, PropTypes.number]),
+	category: PropTypes.string
 }
 
 export default ContactCard
