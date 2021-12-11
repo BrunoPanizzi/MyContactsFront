@@ -20,7 +20,7 @@ const Bounce = styled.div`
   position: relative;
   width: .625rem;
   aspect-ratio: 1;
-  background: ${({ theme }) => theme.colors.veryLight};
+  background: ${({ theme }) => theme.colors.primary.main};
   border-radius: 1000px;
   animation: ${bounceAnimation} 1s infinite alternate ease-in-out;
   animation-delay: ${({ delay }) => delay}
