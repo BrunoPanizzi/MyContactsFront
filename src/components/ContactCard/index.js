@@ -1,8 +1,8 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import formatPhone from '../../utils/formatPhone'
+import useToggle from '../../hooks/useToggle'
 
 import { Container, Info, Icons } from './styles'
 
@@ -14,15 +14,13 @@ import Modal from '../Modal'
 
 function ContactCard({ id, name, email, phone, category }) {
 
-	const [modal, setModal] = useState(false)
+	const [modal, toggleModal] = useToggle(false, true)
 
-	const handleToggleModal = () => {
-		setModal((prevModal) => !prevModal)
-	}
-	
 	return (
 		<Container>
-			{modal && <Modal onClose={handleToggleModal} />}
+			{modal && <Modal 
+				onClose={toggleModal} 
+			/>}
 			<Info>
 				<div>
 					<h2>{name}</h2>
@@ -38,7 +36,7 @@ function ContactCard({ id, name, email, phone, category }) {
 					<img src={edit} alt='trash icon' />
 				</Link>
 			
-				<button onClick={handleToggleModal}>
+				<button onClick={toggleModal}>
 					<img src={trash} alt='trash icon' />
 				</button>
 		

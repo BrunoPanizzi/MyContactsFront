@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
+import useToggle from '../../hooks/useToggle'
+
 import arrow from '../../assets/images/arrow.svg'
+
+import { ListOrderButton, ListContainer } from './styles'
+
 import ContactCard from '../ContactCard'
-
-import { ListOrderButton } from './styles'
-
 import Loader from '../Loader'
 
 function List({ contacts, loading }) {
 
-	const [order, setOrder] = useState('ascending')
+	const [order, toggleOrder] = useToggle('ascending', 'descending')
 	const [arrowRotation, setArrowRotation] = useState(0)
 	
 	contacts.sort((a, b) => {
@@ -21,9 +23,7 @@ function List({ contacts, loading }) {
 	})
 
 	const handleChangeOrder = () => {
-		setOrder(prevOrder => (
-			prevOrder === 'ascending' ? 'descending' : 'ascending'
-		))
+		toggleOrder()
 		setArrowRotation(prevRotation => prevRotation + 180)
 	}
 	
@@ -43,9 +43,7 @@ function List({ contacts, loading }) {
 			{loading 
 			? <Loader /> 
 			: <>
-					<ListOrderButton 
-						onClick={handleChangeOrder}
-					>
+					<ListOrderButton onClick={handleChangeOrder}>
 						Nome
 						<img 
 							style={{transform: `rotate(${arrowRotation}deg)`}}
@@ -54,7 +52,9 @@ function List({ contacts, loading }) {
 							width={18} 
 						/>
 					</ListOrderButton>
-					{contactsComps}
+					<ListContainer>
+						{contactsComps}
+					</ListContainer>
 				</>}
 			</>
 		)

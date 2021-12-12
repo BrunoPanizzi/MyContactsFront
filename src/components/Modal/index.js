@@ -6,20 +6,22 @@ import { useRef } from 'react'
 
 function Modal({ onClose }) {
 
-	const ref = useRef()
+	const background = useRef()
 	const container = useRef()
 	
-
 	const handleOutsideClick = (e) => {
 		if (!container.current.contains(e.target)) {
 			onClose()
 		}
 	}
-	
+
 
 	return ReactDOM.createPortal(
-		<Background ref={ref} onClick={handleOutsideClick}>
-			<Container ref={container}>
+		<Background 
+			ref={background} 
+			onClick={handleOutsideClick} 
+		>
+			<Container ref={container} >
 				<h2>Você realmente deseja excluir esse contato?</h2>
 				<p>Essa ação é irreversível</p>
 				<button 
@@ -28,7 +30,7 @@ function Modal({ onClose }) {
 				>
 					Cancelar
 				</button>
-				<button 
+				<button
 					className='excluir'
 				>
 					Excluir
@@ -40,7 +42,7 @@ function Modal({ onClose }) {
 }
 
 Modal.propTypes = {
-	onClose: PropTypes.func.isRequired
+	onClose: PropTypes.func.isRequired,
 }
 
 export default Modal

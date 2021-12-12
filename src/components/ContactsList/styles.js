@@ -65,3 +65,6 @@ export const ListOrderButton = styled.button`
 		transition: 200ms;
 	}
 `
+
+export const ListContainer = styled.div`
+`
