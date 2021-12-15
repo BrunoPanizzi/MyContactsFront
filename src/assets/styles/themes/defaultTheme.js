@@ -1,4 +1,4 @@
-export default {
+const defaultTheme = {
 	colors: {
 		background: '#f8f8f8',
 		veryLight: '#fff',
@@ -27,3 +27,5 @@ export default {
 	borderRadius: '8px',
 	bigBorderRadius: '16px',
 }
+
+export default defaultTheme

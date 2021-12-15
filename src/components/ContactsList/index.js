@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import ContactService from '../../services/ContactService'
+
 import ListHeader from './ListHeader'
 import List from './List'
 
@@ -13,13 +15,20 @@ function ContactsList() {
 	))
 
 	useEffect(() => {
-		fetch('http://192.168.0.108:3001/contacts')
-			.then(async (response) => {
-				setContacts(await response.json())
-			})
-			.catch((error) => console.log(error))
-			.finally(() => setLoading(false))
-		}, [])
+		const load = async () => {
+			try {
+
+				const list = await ContactService.listContacts()
+				setContacts(list)
+			} catch (err) {
+				console.log(err)
+			}
+		}
+		
+		load()
+		setLoading(false)
+
+	}, [])
 	
 	return (
 		<>

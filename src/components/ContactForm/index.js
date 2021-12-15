@@ -8,7 +8,6 @@ import ErrorContainer from '../ErrorContainer'
 import Input from '../Input'
 import Select from '../Select'
 import Button from '../Button'
-import Loader from '../Loader'
 
 function ContactForm({ buttonLabel }) {
 
