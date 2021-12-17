@@ -11,16 +11,16 @@ import trash from '../../assets/images/trash.svg'
 
 import Modal from '../Modal'
 
-
 function ContactCard({ id, name, email, phone, category }) {
 
 	const [modal, toggleModal] = useToggle(false, true)
 
 	return (
 		<Container>
-			{modal && <Modal 
-				onClose={toggleModal} 
-			/>}
+			<Modal 
+				onClose={toggleModal}
+				shouldAppear={modal} 
+			/>
 			<Info>
 				<div>
 					<h2>{name}</h2>
