@@ -5,13 +5,14 @@ import useToggle from '../../hooks/useToggle'
 
 import arrow from '../../assets/images/arrow.svg'
 
-import { ListOrderButton, ListContainer } from './styles'
+import { ListOrderButton, ListContainer, ErrorContainer } from './styles'
 
 import ContactCard from '../ContactCard'
 import Loader from '../Loader'
+import Button from '../Button'
 
-function List({ contacts, loading }) {
 
+function List({ contacts, loading, error, loadContacts }) {
 	const [order, toggleOrder] = useToggle('ascending', 'descending')
 	const [arrowRotation, setArrowRotation] = useState(0)
 	
@@ -38,31 +39,40 @@ function List({ contacts, loading }) {
 		/>
 	))
 
+	if (loading) {
+		return <Loader />
+	} else if (error) {
+		return (
+			<ErrorContainer onClick={loadContacts}>
+				<h2>Algo deu errado</h2>
+				<Button >Tentar novamente</Button>
+			</ErrorContainer>
+		)
+	}
+	
 	return (
 		<>
-			{loading 
-			? <Loader /> 
-			: <>
-					<ListOrderButton onClick={handleChangeOrder}>
-						Nome
-						<img 
-							style={{transform: `rotate(${arrowRotation}deg)`}}
-							src={arrow} 
-							alt='arrow' 
-							width={18} 
-						/>
-					</ListOrderButton>
-					<ListContainer>
-						{contactsComps}
-					</ListContainer>
-				</>}
-			</>
-		)
+			<ListOrderButton onClick={handleChangeOrder}>
+				Nome
+				<img 
+					style={{transform: `rotate(${arrowRotation}deg)`}}
+					src={arrow} 
+					alt='arrow' 
+					width={18} 
+				/>
+			</ListOrderButton>
+			<ListContainer>
+				{contactsComps}
+			</ListContainer>
+		</>
+	)
 }
 
 List.propTypes = {
 	contacts: PropTypes.array.isRequired,
-	loading: PropTypes.bool.isRequired
+	loading: PropTypes.bool.isRequired,
+	error: PropTypes.bool.isRequired,
+	loadContacts: PropTypes.func.isRequired
 }
 
 export default List
