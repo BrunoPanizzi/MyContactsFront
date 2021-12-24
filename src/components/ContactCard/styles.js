@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   background: ${({ theme }) => theme.colors.veryLight};
+	align-self: stretch;
 	display: flex;
 	flex-direction: row;
 	align-items: center;

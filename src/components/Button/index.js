@@ -5,7 +5,7 @@ export default styled.button`
   background: ${({ theme }) => theme.colors.primary.main};
   color: ${({ theme }) => theme.colors.veryLight};
   border-radius: ${({ theme }) => theme.borderRadius};
-  padding: 1rem 0;
+  padding: .6em 1.2em;
   font-weight: bold;
   font-size: 1.2rem;
 	box-shadow: 0 .2rem .6rem rgba(0,0,0, 0.06);

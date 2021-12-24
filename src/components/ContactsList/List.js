@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import useToggle from '../../hooks/useToggle'
 
@@ -43,10 +44,23 @@ function List({ contacts, loading, error, loadContacts }) {
 		return <Loader />
 	} else if (error) {
 		return (
-			<ErrorContainer onClick={loadContacts}>
+			<ErrorContainer>
 				<h2>Algo deu errado</h2>
-				<Button >Tentar novamente</Button>
+				<Button onClick={loadContacts}>Tentar novamente</Button>
 			</ErrorContainer>
+		)
+	} else if (!error && contacts.length === 0) {
+		return (
+			<>
+				<h2>Você não tem nenhum contato cadastrado</h2>
+				<Link to='/new'>
+					<Button
+						style={{width: 'fit-content', marginTop: '1rem'}}
+					>
+						Crie um contato
+					</Button>
+				</Link>
+			</>
 		)
 	}
 	
@@ -54,16 +68,14 @@ function List({ contacts, loading, error, loadContacts }) {
 		<>
 			<ListOrderButton onClick={handleChangeOrder}>
 				Nome
-				<img 
+				<img
 					style={{transform: `rotate(${arrowRotation}deg)`}}
 					src={arrow} 
 					alt='arrow' 
 					width={18} 
 				/>
 			</ListOrderButton>
-			<ListContainer>
 				{contactsComps}
-			</ListContainer>
 		</>
 	)
 }

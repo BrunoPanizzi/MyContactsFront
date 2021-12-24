@@ -57,6 +57,7 @@ export const Flex = styled.div`
 
 export const ListOrderButton = styled.button`
 	display: flex;
+	align-self: flex-start;
 	font-size: 1rem;
 	background:	${({ theme }) => theme.colors.background};
 	color: ${({ theme }) => theme.colors.primary.main};
@@ -67,12 +68,6 @@ export const ListOrderButton = styled.button`
 `
 
 export const ErrorContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
   h2 {
     color: ${({ theme }) => theme.colors.danger.main};
     margin-bottom: 1rem
@@ -84,4 +79,9 @@ export const ErrorContainer = styled.div`
 `
 
 export const ListContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 `

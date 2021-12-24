@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 
 import ContactService from '../../services/ContactService'
 
+import { ListContainer } from './styles'
+
 import ListHeader from './ListHeader'
 import List from './List'
 
@@ -34,8 +36,19 @@ function ContactsList() {
 	
 	return (
 		<>
-			<ListHeader contactsCount={filteredContacts.length} search={search} setSearch={setSearch} />
-			<List contacts={filteredContacts} loading={loading} error={error} loadContacts={load} />
+			<ListHeader 
+				contactsCount={filteredContacts.length} 
+				search={search} 
+				setSearch={setSearch} 
+			/>
+			<ListContainer>
+				<List
+					contacts={filteredContacts}
+					loading={loading}
+					error={error}
+					loadContacts={load}
+				/>
+			</ListContainer>
 		</>
 	)
 }
