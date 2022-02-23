@@ -1,19 +1,20 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import useToggle from '../../hooks/useToggle'
 
 import arrow from '../../assets/images/arrow.svg'
 
-import { ListOrderButton, ListContainer, ErrorContainer } from './styles'
+import { ListOrderButton } from './styles'
 
 import ContactCard from '../ContactCard'
+import ErrorMessage from '../ErrorMessage'
 import Loader from '../Loader'
-import Button from '../Button'
+import NoContactsMessage from '../NoContactsMessage'
+import NoContactsFound from '../NoContactsFound'
 
 
-function List({ contacts, loading, error, loadContacts }) {
+function List({ contacts, loading, error, loadContacts, search }) {
 	const [order, toggleOrder] = useToggle('ascending', 'descending')
 	const [arrowRotation, setArrowRotation] = useState(0)
 	
@@ -42,27 +43,16 @@ function List({ contacts, loading, error, loadContacts }) {
 
 	if (loading) {
 		return <Loader />
+
 	} else if (error) {
-		return (
-			<ErrorContainer>
-				<h2>Algo deu errado</h2>
-				<Button onClick={loadContacts}>Tentar novamente</Button>
-			</ErrorContainer>
-		)
-	} else if (!error && contacts.length === 0) {
-		return (
-			<>
-				<h2>Você não tem nenhum contato cadastrado</h2>
-				<Link to='/new'>
-					<Button
-						style={{width: 'fit-content', marginTop: '1rem'}}
-					>
-						Crie um contato
-					</Button>
-				</Link>
-			</>
-		)
-	}
+		return <ErrorMessage loadContacts={loadContacts} />
+
+	} else if (contacts.length < 1) {
+		if (!search) {
+			return <NoContactsMessage />
+		}
+		return <NoContactsFound search={search} />
+	}	
 	
 	return (
 		<>
@@ -84,7 +74,8 @@ List.propTypes = {
 	contacts: PropTypes.array.isRequired,
 	loading: PropTypes.bool.isRequired,
 	error: PropTypes.bool.isRequired,
-	loadContacts: PropTypes.func.isRequired
+	loadContacts: PropTypes.func.isRequired,
+	search: PropTypes.string.isRequired,
 }
 
 export default List

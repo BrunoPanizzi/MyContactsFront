@@ -1,14 +1,25 @@
-import Button from '../Button'
+import PropTypes from 'prop-types'
+
+import sad from '../../assets/images/sad.svg'
 
 import { Container } from './styles'
 
-function ErrorMessage() {
+import Button from '../Button'
+
+function ErrorMessage({ loadContacts }) {
   return (
     <Container>
-      <h2>Algo deu errado</h2>
-      <Button >Tentar novamente</Button>
+      <img src={sad} />
+      <div>
+        <h2>Ocorreu um erro ao obter os seus contatos!</h2>
+        <Button onClick={loadContacts} >Tentar novamente</Button>
+      </div>
     </Container>
   )
+}
+
+ErrorMessage.propTypes = {
+	loadContacts: PropTypes.func.isRequired
 }
 
 export default ErrorMessage

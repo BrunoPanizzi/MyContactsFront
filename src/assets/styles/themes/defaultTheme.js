@@ -15,7 +15,7 @@ const defaultTheme = {
 			900: '#001a0c',
 		},
 		danger: {
-			main: '#db2742'
+			main: '#FC5050'
 		}
 	},
 	text: {

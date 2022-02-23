@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo, useCallback } from 'react'
 
 import ContactService from '../../services/ContactService'
 
@@ -13,11 +13,11 @@ function ContactsList() {
 	const [error, setError] = useState(false)
 	const [search, setSearch] = useState('')
 
-	const filteredContacts = contacts.filter(contact => (
+	const filteredContacts = useMemo(() => contacts.filter(contact => (
 		contact.name.toLowerCase().includes(search.toLowerCase())
-	))
+	)), [contacts, search])
 	
-	async function load () {
+	const load = useCallback(async function load () {
 		setError(false)
 		setLoading(true)
 		try {
@@ -28,7 +28,7 @@ function ContactsList() {
 		} finally {
 			setLoading(false)
 		}
-	}
+	}, [])
  
 	useEffect(() => {
 		load()
@@ -39,7 +39,8 @@ function ContactsList() {
 			<ListHeader 
 				contactsCount={filteredContacts.length} 
 				search={search} 
-				setSearch={setSearch} 
+				setSearch={setSearch}
+				searchVisible={!!contacts.length}
 			/>
 			<ListContainer>
 				<List
@@ -47,6 +48,8 @@ function ContactsList() {
 					loading={loading}
 					error={error}
 					loadContacts={load}
+					hasContacts={!!contacts.length}
+					search={search}
 				/>
 			</ListContainer>
 		</>

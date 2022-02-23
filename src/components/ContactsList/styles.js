@@ -67,17 +67,6 @@ export const ListOrderButton = styled.button`
 	}
 `
 
-export const ErrorContainer = styled.div`
-  h2 {
-    color: ${({ theme }) => theme.colors.danger.main};
-    margin-bottom: 1rem
-  }
-
-  button {
-    max-width: 15rem
-  }
-`
-
 export const ListContainer = styled.div`
   width: 100%;
   display: flex;
