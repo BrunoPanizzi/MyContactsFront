@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'	
+import { useState } from 'react'
 
 import isValidEmail from '../../utils/isValidEmail'
 import formatPhone from '../../utils/formatPhone'
@@ -9,114 +9,106 @@ import Input from '../Input'
 import Select from '../Select'
 import Button from '../Button'
 
-function ContactForm({ buttonLabel }) {
+function ContactForm({ buttonLabel, onSubmit }) {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [category, setCategory] = useState('')
 
-	const [name, setName] = useState('')
-	const [email, setEmail] = useState('')
-	const [phone, setPhone] = useState('')
-	const [category, setCategory] = useState('')
+  const [nameError, setNameError] = useState({
+    error: false,
+    message: 'Nome é obrigatório',
+  })
+  const [emailError, setEmailError] = useState({
+    error: false,
+    message: 'Email é obrigatório',
+  })
 
-	const [nameError, setNameError] = useState({ error: false, message: 'Nome é obrigatório'})
-	const [emailError, setEmailError] = useState({ error: false, message: 'Email é obrigatório'})
+  const isFormValid = name && email && !nameError.error && !emailError.error
 
-	const isFormValid = (name && email && !nameError.error && !emailError.error)
+  const handleNameChange = (e) => {
+    setName(e.target.value)
+    setNameError((prevError) => ({ ...prevError, error: false }))
+    if (!e.target.value) {
+      setNameError((prevError) => ({ ...prevError, error: true }))
+    }
+  }
 
-	const handleNameChange = (e) => {
-		setName(e.target.value)
-		setNameError(prevError => ({ ...prevError, error: false }))
-		if (! e.target.value) {
-			setNameError(prevError => ({ ...prevError, error: true }))
-		}
-	}
+  const handleEmailChange = (e) => {
+    const email = e.target.value
+    setEmail(email)
+    setEmailError((prevError) => ({ ...prevError, error: false }))
+    if (!email) {
+      setEmailError({ error: true, message: 'Email é obrigatório' })
+    } else if (!isValidEmail(email)) {
+      setEmailError({ error: true, message: 'Email inválido' })
+    }
+  }
 
-	const handleEmailChange = (e) => {
-		const email = e.target.value
-		setEmail(email)
-		setEmailError(prevError => ({...prevError, error: false}))
-		if (! email) {
-			setEmailError({ error: true, message: 'Email é obrigatório' })
-		} else if (! isValidEmail(email)) {
-			setEmailError({ error: true, message: 'Email inválido' })
-		}
-	} 
-	
-	const handlePhoneChange = (e) => {
-		setPhone(formatPhone(e.target.value))
-	}
-	
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		
-		console.log({ name, email, phone, category })
-	}
+  const handlePhoneChange = (e) => {
+    setPhone(formatPhone(e.target.value))
+  }
 
-	return (
-		<form onSubmit={handleSubmit} noValidate>
-			<ErrorContainer
-				error={nameError.error}
-				errorMessage={nameError.message}
-			>
-				<Input
-					placeholder='Nome...'
-					type='text'
-					value={name}
-					error={nameError.error}
-					onChange={handleNameChange}
-				/>
-			</ErrorContainer>
+  const handleSubmit = (e) => {
+    e.preventDefault()
 
-			<ErrorContainer
-				error={emailError.error}
-				errorMessage={emailError.message}
-			>
-				<Input
-					type='email'
-					placeholder='Email...'
-					value={email}
-					error={emailError.error}
-					onChange={handleEmailChange}
-				/>
-			</ErrorContainer>
+    onSubmit({ name, email, phone, category })
+  }
 
-			<ErrorContainer
-				error={false}
-			>
-				<Input
-					type='tel'
-					placeholder='Telefone...'
-					value={phone}
-					onChange={handlePhoneChange}
-					maxLength={15}
-				/>
-			</ErrorContainer>
+  return (
+    <form onSubmit={handleSubmit} noValidate>
+      <ErrorContainer error={nameError.error} errorMessage={nameError.message}>
+        <Input
+          placeholder="Nome..."
+          type="text"
+          value={name}
+          error={nameError.error}
+          onChange={handleNameChange}
+        />
+      </ErrorContainer>
 
-			<ErrorContainer
-				error={false}
-			>
-				<Select
-					value={category}
-					onChange={(e) => setCategory(e.target.value)}
-				>
-					<option value='' >categoria</option>
-					<option value='insta' >insta</option>
-					<option value='zap' >zap</option>
-					<option value='disc' >disc</option>
-				</Select>
-			</ErrorContainer>
+      <ErrorContainer
+        error={emailError.error}
+        errorMessage={emailError.message}
+      >
+        <Input
+          type="email"
+          placeholder="Email..."
+          value={email}
+          error={emailError.error}
+          onChange={handleEmailChange}
+        />
+      </ErrorContainer>
 
-			<Button 
-				type='submit'
-				disabled={!isFormValid}
-			>
-				{buttonLabel}
-			</Button>
-		
-		</form>
-	)
+      <ErrorContainer error={false}>
+        <Input
+          type="tel"
+          placeholder="Telefone..."
+          value={phone}
+          onChange={handlePhoneChange}
+          maxLength={15}
+        />
+      </ErrorContainer>
+
+      <ErrorContainer error={false}>
+        <Select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="">categoria</option>
+          <option value="insta">insta</option>
+          <option value="zap">zap</option>
+          <option value="disc">disc</option>
+        </Select>
+      </ErrorContainer>
+
+      <Button type="submit" disabled={!isFormValid}>
+        {buttonLabel}
+      </Button>
+    </form>
+  )
 }
 
 ContactForm.propTypes = {
-	buttonLabel: PropTypes.string.isRequired
+  buttonLabel: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 }
 
 export default ContactForm
