@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import isValidEmail from '../../utils/isValidEmail'
 import formatPhone from '../../utils/formatPhone'
@@ -10,6 +11,8 @@ import Select from '../Select'
 import Button from '../Button'
 
 function ContactForm({ buttonLabel, onSubmit }) {
+  const history = useHistory()
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -53,6 +56,8 @@ function ContactForm({ buttonLabel, onSubmit }) {
     e.preventDefault()
 
     onSubmit({ name, email, phone, category })
+
+    history.push('/')
   }
 
   return (

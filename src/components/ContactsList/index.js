@@ -21,13 +21,14 @@ function ContactsList() {
     [contacts, search]
   )
 
-  const load = useCallback(async function load() {
+  const load = useCallback(async () => {
     setError(false)
     setLoading(true)
     try {
       const list = await ContactService.listContacts()
       setContacts(list)
     } catch (err) {
+      console.log(err)
       setError(true)
     } finally {
       setLoading(false)
@@ -36,7 +37,7 @@ function ContactsList() {
 
   useEffect(() => {
     load()
-  }, [])
+  }, [load])
 
   return (
     <>

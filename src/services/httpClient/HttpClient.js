@@ -6,27 +6,19 @@ class HttpClient {
   }
 
   async get(path) {
-    const response = await fetch(this.baseUrl + path)
-
-    const contentType = response.headers.get('Content-Type')
-    let body
-    if (contentType.includes('application/json')) {
-      body = await response.json()
-    }
-
-    if (response.ok) return body
-
-    throw new ApiError(
-      body?.error || `${response.status} ${response.statusText}`
-    )
+    return this.makeRequest(path, { method: 'GET' })
   }
 
   async post(path, data) {
-    const response = await fetch(this.baseUrl + path, {
+    return this.makeRequest(path, {
       method: 'POST',
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' },
     })
+  }
+
+  async makeRequest(path, options) {
+    const response = await fetch(this.baseUrl + path, options)
 
     const contentType = response.headers.get('Content-Type')
     let body
