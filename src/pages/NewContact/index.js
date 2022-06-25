@@ -6,7 +6,8 @@ import ContactForm from '../../components/ContactForm'
 function NewContact() {
   const handleSubmit = async (formData) => {
     try {
-      await ContactService.createContact(formData)
+      const response = await ContactService.createContact(formData)
+      console.log(response)
     } catch {
       alert('algo deu errado')
     }

@@ -1,25 +1,27 @@
-import styled from 'styled-components'
+import propTypes from 'prop-types'
 
-export default styled.button`
-  width: 100%;
-  background: ${({ theme }) => theme.colors.primary.main};
-  color: ${({ theme }) => theme.colors.veryLight};
-  border-radius: ${({ theme }) => theme.borderRadius};
-  padding: .6em 1.2em;
-  font-weight: bold;
-  font-size: 1.2rem;
-	box-shadow: 0 .2rem .6rem rgba(0,0,0, 0.06);
-  transition: 200ms;
+import Loader from '../Loader'
 
-  :hover {
-    background: ${({ theme }) => theme.colors.primary[500]};
-  }
-  :active {
-    background: ${({ theme }) => theme.colors.primary[700]};
-  }
+import { Container } from './styles'
 
-  &[disabled] {
-    background: #aaa;
-    cursor: not-allowed
-  }
-`
+function Button({ children, disabled, isLoading }) {
+  return (
+    <Container disabled={disabled || isLoading}>
+      {!isLoading && children}
+      {isLoading && <Loader />}
+    </Container>
+  )
+}
+
+Button.propTypes = {
+  children: propTypes.node.isRequired,
+  disabled: propTypes.bool,
+  isLoading: propTypes.bool,
+}
+
+Button.defaultProps = {
+  disabled: false,
+  isLoading: false,
+}
+
+export default Button

@@ -10,7 +10,7 @@ export default styled.select`
   outline: none;
   border-radius: ${({ theme }) => theme.borderRadius};
   font-size: 1rem;
-	box-shadow: 0 .2rem .6rem rgba(0,0,0, 0.06);
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.06);
   transition: 200ms;
 
   :hover {
@@ -18,6 +18,13 @@ export default styled.select`
   }
   :focus {
     border-color: ${({ theme }) => theme.colors.main};
-    box-shadow: 0 .2rem .8rem rgba(0,0,0, 0.1);
+    box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.1);
+  }
+
+  &[disabled] {
+    background: #eee;
+    border-color: #ddd;
+    box-shadow: none;
+    opacity: 1;
   }
 `

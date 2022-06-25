@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 
 import isValidEmail from '../../utils/isValidEmail'
 import formatPhone from '../../utils/formatPhone'
@@ -9,14 +8,15 @@ import ErrorContainer from '../ErrorContainer'
 import Input from '../Input'
 import Select from '../Select'
 import Button from '../Button'
+import Loader from '../Loader'
 
 function ContactForm({ buttonLabel, onSubmit }) {
-  const history = useHistory()
-
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [category, setCategory] = useState('')
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [nameError, setNameError] = useState({
     error: false,
@@ -52,12 +52,15 @@ function ContactForm({ buttonLabel, onSubmit }) {
     setPhone(formatPhone(e.target.value))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    onSubmit({ name, email, phone, category })
+    setIsSubmitting(true)
 
-    history.push('/')
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await onSubmit({ name, email, phone, category })
+
+    setIsSubmitting(false)
   }
 
   return (
@@ -69,12 +72,14 @@ function ContactForm({ buttonLabel, onSubmit }) {
           value={name}
           error={nameError.error}
           onChange={handleNameChange}
+          disabled={isSubmitting}
         />
       </ErrorContainer>
 
       <ErrorContainer
         error={emailError.error}
         errorMessage={emailError.message}
+        disabled={isSubmitting}
       >
         <Input
           type="email"
@@ -82,6 +87,7 @@ function ContactForm({ buttonLabel, onSubmit }) {
           value={email}
           error={emailError.error}
           onChange={handleEmailChange}
+          disabled={isSubmitting}
         />
       </ErrorContainer>
 
@@ -92,11 +98,16 @@ function ContactForm({ buttonLabel, onSubmit }) {
           value={phone}
           onChange={handlePhoneChange}
           maxLength={15}
+          disabled={isSubmitting}
         />
       </ErrorContainer>
 
       <ErrorContainer error={false}>
-        <Select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <Select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          disabled={isSubmitting}
+        >
           <option value="">categoria</option>
           <option value="insta">insta</option>
           <option value="zap">zap</option>
@@ -104,8 +115,9 @@ function ContactForm({ buttonLabel, onSubmit }) {
         </Select>
       </ErrorContainer>
 
-      <Button type="submit" disabled={!isFormValid}>
-        {buttonLabel}
+      <Button type="submit" disabled={!isFormValid || isSubmitting}>
+        {!isSubmitting && buttonLabel}
+        {isSubmitting && <Loader />}
       </Button>
     </form>
   )
