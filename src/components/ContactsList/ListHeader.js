@@ -4,31 +4,31 @@ import PropTypes from 'prop-types'
 import { SearchInput, Flex } from './styles'
 
 function ListHeader({ contactsCount, search, setSearch, searchVisible }) {
-	return (
-		<>
-			{searchVisible &&
-				<SearchInput 
-					placeholder='Procure um contato...'
-					value={search}
-					onChange={e => setSearch(e.target.value)}
-				/>
-			}
-			<Flex>
-				<span>
-					{contactsCount} 
-					{contactsCount === 1 ? ' contato' : ' contatos'}
-				</span>
-				<Link to='/new' >Novo Contato</Link>
-			</Flex>
-		</>
-	)
+  return (
+    <>
+      {searchVisible && (
+        <SearchInput
+          placeholder="Procure um contato..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      )}
+      <Flex>
+        <span>
+          {contactsCount}
+          {contactsCount === 1 ? ' contato' : ' contatos'}
+        </span>
+        <Link to="/new">Novo Contato</Link>
+      </Flex>
+    </>
+  )
 }
 
 ListHeader.propTypes = {
-	contactsCount: PropTypes.number.isRequired,
-	search: PropTypes.string.isRequired,
-	setSearch: PropTypes.func.isRequired,
-	searchVisible: PropTypes.bool.isRequired
+  contactsCount: PropTypes.number.isRequired,
+  search: PropTypes.string.isRequired,
+  setSearch: PropTypes.func.isRequired,
+  searchVisible: PropTypes.bool.isRequired,
 }
 
 export default ListHeader
