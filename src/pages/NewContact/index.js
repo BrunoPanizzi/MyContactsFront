@@ -1,15 +1,21 @@
+import { useToast } from '../../components/Toast/toastStore'
+
 import ContactService from '../../services/ContactService'
 
 import PageHeader from '../../components/PageHeader'
 import ContactForm from '../../components/ContactForm'
 
 function NewContact() {
+  const addToast = useToast((state) => state.addToast)
+
   const handleSubmit = async (formData) => {
     try {
       const response = await ContactService.createContact(formData)
       console.log(response)
+
+      addToast('Contato criado')
     } catch {
-      alert('algo deu errado')
+      addToast('Algo deu errado', 'error')
     }
   }
 
