@@ -12,5 +12,10 @@ class ContactService {
   async createContact(data) {
     return this.httpClient.post('/contacts', data)
   }
+
+  async deleteContact(id) {
+    return this.httpClient.delete('/contacts/' + id)
+  }
 }
 export default new ContactService()
+

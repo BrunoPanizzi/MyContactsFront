@@ -29,17 +29,6 @@ function List({ contacts, loading, error, loadContacts, search }) {
     setArrowRotation((prevRotation) => prevRotation + 180)
   }
 
-  const contactsComps = contacts.map((contact) => (
-    <ContactCard
-      key={contact.id}
-      id={contact.id}
-      name={contact.name}
-      email={contact.email}
-      phone={contact.phone}
-      category={contact.category}
-    />
-  ))
-
   if (loading) {
     return <Loader />
   } else if (error) {
@@ -62,7 +51,16 @@ function List({ contacts, loading, error, loadContacts, search }) {
           width={18}
         />
       </ListOrderButton>
-      {contactsComps}
+      {contacts.map((contact) => (
+        <ContactCard
+          key={contact.id}
+          id={contact.id}
+          name={contact.name}
+          email={contact.email}
+          phone={contact.phone}
+          category={contact.category}
+        />
+      ))}
     </>
   )
 }
@@ -76,3 +74,4 @@ List.propTypes = {
 }
 
 export default List
+
