@@ -5,17 +5,20 @@ class ContactService {
     this.httpClient = new HttpClient('http://localhost:3001')
   }
 
-  async listContacts() {
+  listContacts() {
     return this.httpClient.get('/contacts')
   }
 
-  async createContact(data) {
+  getContactById(id) {
+    return this.httpClient.get(`/contacts/${id}`)
+  }
+
+  createContact(data) {
     return this.httpClient.post('/contacts', data)
   }
 
-  async deleteContact(id) {
+  deleteContact(id) {
     return this.httpClient.delete('/contacts/' + id)
   }
 }
 export default new ContactService()
-

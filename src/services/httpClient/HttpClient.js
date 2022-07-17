@@ -31,7 +31,6 @@ class HttpClient {
     let body
     if (contentType?.includes('application/json')) {
       body = await response.json()
-      console.log(body)
     }
 
     if (response.ok) return body

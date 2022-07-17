@@ -45,7 +45,7 @@ function ContactCard({ id, name, email, phone, category }) {
       </Info>
 
       <Icons>
-        <Link to="/edit/placeholder">
+        <Link to={`/edit/${id}`}>
           <img src={edit} alt="trash icon" />
         </Link>
 

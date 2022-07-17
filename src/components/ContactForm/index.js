@@ -10,11 +10,11 @@ import Select from '../Select'
 import Button from '../Button'
 import Loader from '../Loader'
 
-function ContactForm({ buttonLabel, onSubmit }) {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [category, setCategory] = useState('')
+function ContactForm({ buttonLabel, onSubmit, contactInfo }) {
+  const [name, setName] = useState(contactInfo.name)
+  const [email, setEmail] = useState(contactInfo.email)
+  const [phone, setPhone] = useState(contactInfo.phone)
+  const [category, setCategory] = useState(contactInfo.category)
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -57,7 +57,6 @@ function ContactForm({ buttonLabel, onSubmit }) {
 
     setIsSubmitting(true)
 
-    await new Promise((resolve) => setTimeout(resolve, 1000))
     await onSubmit({ name, email, phone, category })
 
     setIsSubmitting(false)
@@ -126,6 +125,21 @@ function ContactForm({ buttonLabel, onSubmit }) {
 ContactForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  contactInfo: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+  }),
+}
+
+ContactForm.defaultProps = {
+  contactInfo: {
+    name: '',
+    email: '',
+    phone: '',
+    category: '',
+  },
 }
 
 export default ContactForm

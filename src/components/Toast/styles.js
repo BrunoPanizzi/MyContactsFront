@@ -38,8 +38,10 @@ export const Message = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 1rem 2rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 
-  position: relative; // for the remove icon
+  position: relative; // for the timebar
+  overflow: hidden;
   display: grid;
   place-items: center;
 
@@ -57,29 +59,6 @@ export const Message = styled.div`
     background-color: ${({ theme }) => theme.colors.primary.main};
 
     animation: ${shrink} ${({ duration }) => duration + 's'} linear;
-  }
-
-  .remove {
-    width: 2rem;
-    aspect-ratio: 1;
-    background: none;
-    position: absolute;
-    z-index: -1;
-    right: 0;
-    transform: rotate(-45deg);
-    transition: 200ms;
-
-    img {
-      width: 100%;
-      aspect-ratio: 1;
-      z-index: -1;
-    }
-  }
-
-  &:hover {
-    .remove {
-      transform: translateX(100%);
-    }
   }
 
   ${({ type }) => messageVariants[type] || messageVariants.default}
