@@ -114,7 +114,7 @@ function ContactForm({ buttonLabel, onSubmit, contactInfo }) {
         </Select>
       </ErrorContainer>
 
-      <Button type="submit" disabled={!isFormValid || isSubmitting}>
+      <Button type="submit" disabled={!isFormValid || isSubmitting} fullWidth>
         {!isSubmitting && buttonLabel}
         {isSubmitting && <Loader />}
       </Button>

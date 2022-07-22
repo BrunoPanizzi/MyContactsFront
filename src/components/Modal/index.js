@@ -1,33 +1,36 @@
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import { useRef } from 'react'
 
 import { Background, Container } from './styles'
 
 import FadeInOut from '../FadeInOut'
+import Button from '../Button'
 
-function Modal({ shouldAppear, onClose, action }) {
-  const background = useRef()
-  const container = useRef()
-
-  const handleOutsideClick = (e) => {
-    if (!container.current.contains(e.target)) {
-      onClose()
-    }
-  }
-
+function Modal({
+  shouldAppear,
+  onClose,
+  action,
+  title,
+  content,
+  danger,
+  cancelLabel,
+  confirmLabel,
+}) {
   return ReactDOM.createPortal(
     <FadeInOut shouldAppear={shouldAppear}>
-      <Background ref={background} onClick={handleOutsideClick}>
-        <Container ref={container}>
-          <h2>Você realmente deseja excluir esse contato?</h2>
-          <p>Essa ação é irreversível</p>
-          <button className="cancelar" onClick={onClose}>
-            Cancelar
-          </button>
-          <button onClick={action} className="excluir">
-            Excluir
-          </button>
+      <Background onClick={onClose}>
+        <Container danger={danger} onClick={(e) => e.stopPropagation()}>
+          <h2>{title}</h2>
+          <p>{content}</p>
+
+          <div class="buttons">
+            <Button onClick={onClose} outline customColor="#555">
+              {cancelLabel}
+            </Button>
+            <Button onClick={action} danger={danger}>
+              {confirmLabel}
+            </Button>
+          </div>
         </Container>
       </Background>
     </FadeInOut>,
@@ -39,6 +42,16 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   shouldAppear: PropTypes.bool.isRequired,
   action: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  danger: PropTypes.bool,
+  cancelLabel: PropTypes.string,
+  confirmLabel: PropTypes.string,
+}
+Modal.defaultProps = {
+  danger: false,
+  cancelLabel: 'Cancelar',
+  confirmLabel: 'Confirmar',
 }
 
 export default Modal

@@ -34,7 +34,15 @@ function ContactCard({ id, name, email, phone, category }) {
 
   return (
     <Container>
-      <Modal onClose={toggleModal} shouldAppear={modal} action={handleDelete} />
+      <Modal
+        onClose={toggleModal}
+        shouldAppear={modal}
+        action={handleDelete}
+        danger
+        title={`Você realmente deseja excluir ${name}?`}
+        content="Essa ação não pode ser desfeita."
+        confirmLabel="Excluir"
+      />
       <Info>
         <div>
           <h2>{name}</h2>
