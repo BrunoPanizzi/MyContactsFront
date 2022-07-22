@@ -17,6 +17,14 @@ class HttpClient {
     })
   }
 
+  async put(path, data) {
+    return this.makeRequest(path, {
+      method: 'PUT',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+  }
+
   async delete(path) {
     return this.makeRequest(path, {
       method: 'DELETE',

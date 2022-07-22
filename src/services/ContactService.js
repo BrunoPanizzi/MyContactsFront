@@ -17,8 +17,12 @@ class ContactService {
     return this.httpClient.post('/contacts', data)
   }
 
+  editContact(id, data) {
+    return this.httpClient.put(`/contacts/${id}`, data)
+  }
+
   deleteContact(id) {
-    return this.httpClient.delete('/contacts/' + id)
+    return this.httpClient.delete(`/contacts/${id}`)
   }
 }
 export default new ContactService()

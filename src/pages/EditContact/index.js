@@ -18,8 +18,17 @@ function EditContact() {
   const { id } = useParams()
   const history = useHistory()
 
-  const handleSubmit = () => {
-    console.log('submit')
+  const handleSubmit = async (formData) => {
+    try {
+      const response = await ContactService.editContact(id, formData)
+
+      setContact(response)
+
+      toast('Contato editado')
+    } catch (e) {
+      console.log(e)
+      toast('Algo deu errado', 'error')
+    }
   }
 
   useEffect(() => {
@@ -39,7 +48,7 @@ function EditContact() {
 
   return (
     <>
-      <PageHeader title="Editar contato" />
+      <PageHeader title={`Editar ${contact?.name}`} />
 
       {isLoading ? (
         <Loader />
