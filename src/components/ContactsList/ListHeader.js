@@ -1,12 +1,20 @@
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+
+import { useContacts } from './contactsStore'
 
 import { SearchInput, Flex } from './styles'
 
-function ListHeader({ contactsCount, search, setSearch, searchVisible }) {
+function ListHeader() {
+  const [search, setSearch, contacts, filteredContacts] = useContacts((s) => [
+    s.search,
+    s.setSearch,
+    s.contacts,
+    s.filteredContacts,
+  ])
+
   return (
     <>
-      {searchVisible && (
+      {!!contacts.length && (
         <SearchInput
           placeholder="Procure um contato..."
           value={search}
@@ -15,20 +23,13 @@ function ListHeader({ contactsCount, search, setSearch, searchVisible }) {
       )}
       <Flex>
         <span>
-          {contactsCount}
-          {contactsCount === 1 ? ' contato' : ' contatos'}
+          {filteredContacts.length}
+          {filteredContacts.length === 1 ? ' contato' : ' contatos'}
         </span>
         <Link to="/new">Novo Contato</Link>
       </Flex>
     </>
   )
-}
-
-ListHeader.propTypes = {
-  contactsCount: PropTypes.number.isRequired,
-  search: PropTypes.string.isRequired,
-  setSearch: PropTypes.func.isRequired,
-  searchVisible: PropTypes.bool.isRequired,
 }
 
 export default ListHeader

@@ -1,6 +1,8 @@
-import { useEffect, useState, useMemo, useCallback } from 'react'
+import { useEffect, useCallback } from 'react'
 
 import ContactService from '../../services/ContactService'
+
+import { useContacts } from './contactsStore'
 
 import { ListContainer } from './styles'
 
@@ -8,18 +10,11 @@ import ListHeader from './ListHeader'
 import List from './List'
 
 function ContactsList() {
-  const [contacts, setContacts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-  const [search, setSearch] = useState('')
-
-  const filteredContacts = useMemo(
-    () =>
-      contacts.filter((contact) =>
-        contact.name.toLowerCase().includes(search.toLowerCase())
-      ),
-    [contacts, search]
-  )
+  const [setError, setContacts, setLoading] = useContacts((s) => [
+    s.setError,
+    s.setContacts,
+    s.setLoading,
+  ])
 
   const load = useCallback(async () => {
     setError(false)
@@ -41,21 +36,9 @@ function ContactsList() {
 
   return (
     <>
-      <ListHeader
-        contactsCount={filteredContacts.length}
-        search={search}
-        setSearch={setSearch}
-        searchVisible={!!contacts.length}
-      />
+      <ListHeader />
       <ListContainer>
-        <List
-          contacts={filteredContacts}
-          loading={loading}
-          error={error}
-          loadContacts={load}
-          hasContacts={!!contacts.length}
-          search={search}
-        />
+        <List loadContacts={load} />
       </ListContainer>
     </>
   )

@@ -5,6 +5,8 @@ import useToggle from '../../hooks/useToggle'
 
 import arrow from '../../assets/images/arrow.svg'
 
+import { useContacts } from './contactsStore'
+
 import { ListOrderButton } from './styles'
 
 import ContactCard from '../ContactCard'
@@ -13,19 +15,23 @@ import Loader from '../Loader'
 import NoContactsMessage from '../NoContactsMessage'
 import NoContactsFound from '../NoContactsFound'
 
-function List({ contacts, loading, error, loadContacts, search }) {
+function List({ loadContacts }) {
+  const { loading, error, filteredContacts, contacts, search, setContacts } =
+    useContacts()
+
   const [order, toggleOrder] = useToggle('ascending', 'descending')
   const [arrowRotation, setArrowRotation] = useState(0)
 
-  contacts.sort((a, b) => {
-    if (order === 'ascending') {
-      return a.name > b.name ? 1 : -1
-    }
-    return a.name < b.name ? 1 : -1
-  })
-
   const handleChangeOrder = () => {
     toggleOrder()
+    setContacts(
+      contacts.sort((a, b) => {
+        if (order === 'ascending') {
+          return a.name < b.name ? 1 : -1
+        }
+        return a.name > b.name ? 1 : -1
+      })
+    )
     setArrowRotation((prevRotation) => prevRotation + 180)
   }
 
@@ -33,7 +39,7 @@ function List({ contacts, loading, error, loadContacts, search }) {
     return <Loader />
   } else if (error) {
     return <ErrorMessage loadContacts={loadContacts} />
-  } else if (contacts.length < 1) {
+  } else if (filteredContacts.length < 1) {
     if (!search) {
       return <NoContactsMessage />
     }
@@ -51,27 +57,15 @@ function List({ contacts, loading, error, loadContacts, search }) {
           width={18}
         />
       </ListOrderButton>
-      {contacts.map((contact) => (
-        <ContactCard
-          key={contact.id}
-          id={contact.id}
-          name={contact.name}
-          email={contact.email}
-          phone={contact.phone}
-          category={contact.category}
-        />
+      {filteredContacts.map((contact) => (
+        <ContactCard key={contact.id} {...contact} />
       ))}
     </>
   )
 }
 
 List.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
   loadContacts: PropTypes.func.isRequired,
-  search: PropTypes.string.isRequired,
 }
 
 export default List
-

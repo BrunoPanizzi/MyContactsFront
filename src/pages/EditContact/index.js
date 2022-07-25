@@ -48,7 +48,9 @@ function EditContact() {
 
   return (
     <>
-      <PageHeader title={`Editar ${contact?.name}`} />
+      <PageHeader
+        title={contact ? `Editar ${contact?.name}` : 'Carregando...'}
+      />
 
       {isLoading ? (
         <Loader />
