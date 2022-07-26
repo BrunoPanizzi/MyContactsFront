@@ -34,7 +34,7 @@ function Button({
 }
 
 Button.propTypes = {
-  onClick: propTypes.node.isRequired,
+  onClick: propTypes.func.isRequired,
   children: propTypes.node.isRequired,
   disabled: propTypes.bool,
   isLoading: propTypes.bool,
@@ -55,3 +55,4 @@ Button.defaultProps = {
 }
 
 export default Button
+

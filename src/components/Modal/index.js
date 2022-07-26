@@ -17,14 +17,14 @@ export default function Modal({
   confirmLabel,
 }) {
   return (
-    <Portal containerId='modal-root'>
+    <Portal containerId="modal-root">
       <FadeInOut shouldAppear={shouldAppear}>
         <Background onClick={onClose}>
           <Container danger={danger} onClick={(e) => e.stopPropagation()}>
             <h2>{title}</h2>
             <p>{content}</p>
-  
-            <div class="buttons">
+
+            <div className="buttons">
               <Button onClick={onClose} outline customColor="#555">
                 {cancelLabel}
               </Button>
@@ -54,4 +54,3 @@ Modal.defaultProps = {
   cancelLabel: 'Cancelar',
   confirmLabel: 'Confirmar',
 }
-
