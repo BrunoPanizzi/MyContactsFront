@@ -45,7 +45,11 @@ function List({ loadContacts }) {
         />
       </ListOrderButton>
       {filteredContacts.map((contact) => (
-        <ContactCard key={contact.id} {...contact} />
+        <ContactCard
+          key={contact.id}
+          {...contact}
+          loadContacts={loadContacts}
+        />
       ))}
     </>
   )

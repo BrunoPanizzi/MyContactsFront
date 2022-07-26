@@ -15,7 +15,7 @@ import trash from '../../assets/images/trash.svg'
 
 import Modal from '../Modal'
 
-function ContactCard({ id, name, email, phone, category }) {
+function ContactCard({ id, name, email, phone, category, loadContacts }) {
   const addToast = useToast((store) => store.addToast)
 
   const [modal, toggleModal] = useToggle(false, true)
@@ -27,6 +27,7 @@ function ContactCard({ id, name, email, phone, category }) {
       addToast('Contato deletado')
 
       toggleModal()
+      loadContacts()
     } catch {
       addToast('Não foi possivel remover o contato', 'error')
     }
@@ -69,6 +70,7 @@ ContactCard.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  loadContacts: PropTypes.func.isRequired,
   phone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   category: PropTypes.string,
 }
