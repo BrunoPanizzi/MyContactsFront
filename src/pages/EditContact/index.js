@@ -44,7 +44,7 @@ function EditContact() {
       }
     }
     get()
-  }, [id])
+  }, [id, history, toast])
 
   return (
     <>

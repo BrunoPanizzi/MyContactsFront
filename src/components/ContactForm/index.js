@@ -1,66 +1,28 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
-
-import isValidEmail from '../../utils/isValidEmail'
-import formatPhone from '../../utils/formatPhone'
 
 import ErrorContainer from '../ErrorContainer'
 import Input from '../Input'
 import Select from '../Select'
 import Button from '../Button'
 import Loader from '../Loader'
+import useContactForm from './useContactForm'
 
 function ContactForm({ buttonLabel, onSubmit, contactInfo }) {
-  const [name, setName] = useState(contactInfo.name)
-  const [email, setEmail] = useState(contactInfo.email)
-  const [phone, setPhone] = useState(contactInfo.phone)
-  const [category, setCategory] = useState(contactInfo.category)
-
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const [nameError, setNameError] = useState({
-    error: false,
-    message: 'Nome é obrigatório',
-  })
-  const [emailError, setEmailError] = useState({
-    error: false,
-    message: 'Email é obrigatório',
-  })
-
-  const isFormValid = name && email && !nameError.error && !emailError.error
-
-  const handleNameChange = (e) => {
-    setName(e.target.value)
-    setNameError((prevError) => ({ ...prevError, error: false }))
-    if (!e.target.value) {
-      setNameError((prevError) => ({ ...prevError, error: true }))
-    }
-  }
-
-  const handleEmailChange = (e) => {
-    const email = e.target.value
-    setEmail(email)
-    setEmailError((prevError) => ({ ...prevError, error: false }))
-    if (!email) {
-      setEmailError({ error: true, message: 'Email é obrigatório' })
-    } else if (!isValidEmail(email)) {
-      setEmailError({ error: true, message: 'Email inválido' })
-    }
-  }
-
-  const handlePhoneChange = (e) => {
-    setPhone(formatPhone(e.target.value))
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    setIsSubmitting(true)
-
-    await onSubmit({ name, email, phone, category })
-
-    setIsSubmitting(false)
-  }
+  const {
+    name,
+    email,
+    phone,
+    category,
+    isSubmitting,
+    nameError,
+    emailError,
+    isFormValid,
+    handleNameChange,
+    handleEmailChange,
+    handlePhoneChange,
+    handleCategoryChange,
+    handleSubmit,
+  } = useContactForm(onSubmit, contactInfo)
 
   return (
     <form onSubmit={handleSubmit} noValidate>
@@ -104,7 +66,7 @@ function ContactForm({ buttonLabel, onSubmit, contactInfo }) {
       <ErrorContainer error={false}>
         <Select
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={handleCategoryChange}
           disabled={isSubmitting}
         >
           <option value="">categoria</option>

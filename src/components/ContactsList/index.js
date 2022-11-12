@@ -28,7 +28,7 @@ function ContactsList() {
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [setContacts, setError, setLoading])
 
   useEffect(() => {
     load()

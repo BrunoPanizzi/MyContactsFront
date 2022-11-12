@@ -5,7 +5,7 @@ import { Container } from './styles'
 export default function NoContactsMessage() {
   return (
     <Container>
-      <img src={emptyBox} />
+      <img src={emptyBox} alt="caixa vazia" />
       <p>
         Você ainda não tem nenhum contato cadastrado!
         <br />
