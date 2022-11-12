@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import arrow from '../../../assets/images/arrow.svg'
 
 import { useHome } from '../homeStore'
-import { ListContainer, ListOrderButton } from '../styles'
+import { ListOrderButton } from '../styles'
 import ContactCard from './ContactCard'
 
 import Loader from '../../../components/Loader'
@@ -31,7 +31,7 @@ function List({ loadContacts }) {
   }
 
   return (
-    <ListContainer>
+    <>
       <ListOrderButton onClick={handleChangeOrder}>
         Nome
         <img
@@ -50,7 +50,7 @@ function List({ loadContacts }) {
           loadContacts={loadContacts}
         />
       ))}
-    </ListContainer>
+    </>
   )
 }
 

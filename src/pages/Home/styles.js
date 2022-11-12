@@ -68,10 +68,3 @@ export const ListOrderButton = styled.button`
     transition: 200ms;
   }
 `
-
-export const ListContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
