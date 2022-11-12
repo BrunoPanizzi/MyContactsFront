@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 
-import sad from '../../assets/images/sad.svg'
+import sad from '../../../../assets/images/sad.svg'
 
 import { Container } from './styles'
 
-import Button from '../Button'
+import Button from '../../../../components/Button'
 
 function ErrorMessage({ loadContacts }) {
   return (
@@ -23,4 +23,3 @@ ErrorMessage.propTypes = {
 }
 
 export default ErrorMessage
-

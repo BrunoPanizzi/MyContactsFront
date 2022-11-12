@@ -1,25 +1,24 @@
 import PropTypes from 'prop-types'
 
-import arrow from '../../assets/images/arrow.svg'
+import arrow from '../../../assets/images/arrow.svg'
 
-import { useContacts } from './contactsStore'
+import { useHome } from '../homeStore'
+import { ListContainer, ListOrderButton } from '../styles'
+import ContactCard from './ContactCard'
 
-import { ListOrderButton } from './styles'
+import Loader from '../../../components/Loader'
 
-import ContactCard from '../ContactCard'
-import ErrorMessage from '../ErrorMessage'
-import Loader from '../Loader'
-import NoContactsMessage from '../NoContactsMessage'
-import NoContactsFound from '../NoContactsFound'
+import { ErrorMessage, NoContactsFound, NoContactsMessage } from '../messages'
 
 function List({ loadContacts }) {
   const { loading, error, filteredContacts, search, order, setOrder } =
-    useContacts()
+    useHome()
 
   const handleChangeOrder = () => {
     setOrder(order === 'ascending' ? 'descending' : 'ascending')
   }
 
+  // error handling
   if (loading) {
     return <Loader />
   } else if (error) {
@@ -32,7 +31,7 @@ function List({ loadContacts }) {
   }
 
   return (
-    <>
+    <ListContainer>
       <ListOrderButton onClick={handleChangeOrder}>
         Nome
         <img
@@ -51,7 +50,7 @@ function List({ loadContacts }) {
           loadContacts={loadContacts}
         />
       ))}
-    </>
+    </ListContainer>
   )
 }
 

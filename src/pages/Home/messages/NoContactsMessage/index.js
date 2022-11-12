@@ -1,4 +1,4 @@
-import emptyBox from '../../assets/images/empty-box.svg'
+import emptyBox from '../../../../assets/images/empty-box.svg'
 
 import { Container } from './styles'
 

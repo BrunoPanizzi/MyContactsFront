@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import formatPhone from '../../utils/formatPhone'
-import useToggle from '../../hooks/useToggle'
+import formatPhone from '../../../../utils/formatPhone'
+import useToggle from '../../../../hooks/useToggle'
 
-import { useToast } from '../Toast/toastStore'
+import { useToast } from '../../../../components/Toast/toastStore'
 
-import ContactService from '../../services/ContactService'
+import ContactService from '../../../../services/ContactService'
 
 import { Container, Info, Icons } from './styles'
 
-import edit from '../../assets/images/edit.svg'
-import trash from '../../assets/images/trash.svg'
+import edit from '../../../../assets/images/edit.svg'
+import trash from '../../../../assets/images/trash.svg'
 
-import Modal from '../Modal'
+import Modal from '../../../../components/Modal'
 
 function ContactCard({ id, name, email, phone, category, loadContacts }) {
   const addToast = useToast((store) => store.addToast)

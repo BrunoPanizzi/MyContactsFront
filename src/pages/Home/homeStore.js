@@ -1,6 +1,6 @@
 import create from 'zustand'
 
-export const useContacts = create((set, get) => ({
+export const useHome = create((set, get) => ({
   contacts: [],
   filteredContacts: [],
   error: false,
