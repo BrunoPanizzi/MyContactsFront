@@ -15,7 +15,15 @@ import trash from '../../../../assets/images/trash.svg'
 
 import Modal from '../../../../components/Modal'
 
-function ContactCard({ id, name, email, phone, category, loadContacts }) {
+function ContactCard({
+  id,
+  name,
+  email,
+  phone,
+  categoryId,
+  categoryName,
+  loadContacts,
+}) {
   const addToast = useToast((store) => store.addToast)
 
   const [modal, toggleModal] = useToggle(false, true)
@@ -47,7 +55,7 @@ function ContactCard({ id, name, email, phone, category, loadContacts }) {
       <Info>
         <div>
           <h2>{name}</h2>
-          {category && <span>{category}</span>}
+          {categoryId && <span>{categoryName}</span>}
         </div>
         {phone && <p>{formatPhone(phone.toString())}</p>}
         <p>{email}</p>
@@ -72,7 +80,8 @@ ContactCard.propTypes = {
   email: PropTypes.string.isRequired,
   loadContacts: PropTypes.func.isRequired,
   phone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  category: PropTypes.string,
+  categoryId: PropTypes.string,
+  categoryName: PropTypes.string,
 }
 
 export default ContactCard

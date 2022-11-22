@@ -19,6 +19,7 @@ function Home() {
     setLoading(true)
     try {
       const list = await ContactService.listContacts()
+      console.log(list)
       setContacts(list)
     } catch (err) {
       console.log(err)

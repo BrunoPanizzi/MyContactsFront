@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import isValidEmail from '../../utils/isValidEmail'
 import formatPhone from '../../utils/formatPhone'
+
+import CategoryService from '../../services/CategoryService'
 
 export default function useContactForm(onSubmit, contactInfo) {
   const [name, setName] = useState(contactInfo.name)
   const [email, setEmail] = useState(contactInfo.email)
   const [phone, setPhone] = useState(contactInfo.phone)
-  const [category, setCategory] = useState(contactInfo.category)
+  const [categoryId, setCategoryId] = useState(contactInfo.categoryId)
+  const [categories, setCategories] = useState([])
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -46,7 +49,7 @@ export default function useContactForm(onSubmit, contactInfo) {
   }
 
   const handleCategoryChange = (e) => {
-    setCategory(e.target.value)
+    setCategoryId(e.target.value)
   }
 
   const handleSubmit = async (e) => {
@@ -54,16 +57,29 @@ export default function useContactForm(onSubmit, contactInfo) {
 
     setIsSubmitting(true)
 
-    await onSubmit({ name, email, phone, category })
+    await onSubmit({ name, email, phone, categoryId })
 
     setIsSubmitting(false)
   }
+
+  useEffect(() => {
+    const get = async () => {
+      try {
+        const categoriesList = await CategoryService.listCategories()
+        setCategories(categoriesList)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    get()
+  })
 
   return {
     name,
     email,
     phone,
-    category,
+    categoryId,
+    categories,
     isSubmitting,
     nameError,
     emailError,

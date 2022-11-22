@@ -12,7 +12,8 @@ function ContactForm({ buttonLabel, onSubmit, contactInfo }) {
     name,
     email,
     phone,
-    category,
+    categoryId,
+    categories,
     isSubmitting,
     nameError,
     emailError,
@@ -65,14 +66,16 @@ function ContactForm({ buttonLabel, onSubmit, contactInfo }) {
 
       <ErrorContainer error={false}>
         <Select
-          value={category}
+          value={categoryId}
           onChange={handleCategoryChange}
           disabled={isSubmitting}
         >
-          <option value="">categoria</option>
-          <option value="insta">insta</option>
-          <option value="zap">zap</option>
-          <option value="disc">disc</option>
+          <option value="">Sem categoria</option>
+          {categories.map((c) => (
+            <option value={c.id} key={c.id}>
+              {c.name}
+            </option>
+          ))}
         </Select>
       </ErrorContainer>
 
@@ -91,7 +94,7 @@ ContactForm.propTypes = {
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
+    categoryId: PropTypes.string.isRequired,
   }),
 }
 
@@ -100,7 +103,7 @@ ContactForm.defaultProps = {
     name: '',
     email: '',
     phone: '',
-    category: '',
+    categoryId: '',
   },
 }
 
