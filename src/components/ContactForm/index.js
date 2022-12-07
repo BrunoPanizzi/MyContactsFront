@@ -67,7 +67,7 @@ function ContactForm({ buttonLabel, onSubmit, contactInfo }) {
 
       <ErrorContainer error={false}>
         <Select
-          value={categoryId}
+          value={categoryId ?? ''}
           onChange={handleCategoryChange}
           disabled={isSubmitting || categoriesLoading}
         >
@@ -95,7 +95,7 @@ ContactForm.propTypes = {
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
-    categoryId: PropTypes.string.isRequired,
+    categoryId: PropTypes.string,
   }),
 }
 
