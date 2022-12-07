@@ -11,6 +11,7 @@ export default function useContactForm(onSubmit, contactInfo) {
   const [phone, setPhone] = useState(contactInfo.phone)
   const [categoryId, setCategoryId] = useState(contactInfo.categoryId)
   const [categories, setCategories] = useState([])
+  const [categoriesLoading, setCategoriesLoading] = useState(true)
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -65,14 +66,20 @@ export default function useContactForm(onSubmit, contactInfo) {
   useEffect(() => {
     const get = async () => {
       try {
+        setCategoriesLoading(true)
         const categoriesList = await CategoryService.listCategories()
         setCategories(categoriesList)
       } catch (e) {
         console.log(e)
+        alert(
+          'ocorreu um erro ao obter as categorias, tente novamente em instantes'
+        )
+      } finally {
+        setCategoriesLoading(false)
       }
     }
     get()
-  })
+  }, [])
 
   return {
     name,
@@ -80,6 +87,7 @@ export default function useContactForm(onSubmit, contactInfo) {
     phone,
     categoryId,
     categories,
+    categoriesLoading,
     isSubmitting,
     nameError,
     emailError,

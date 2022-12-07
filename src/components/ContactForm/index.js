@@ -14,6 +14,7 @@ function ContactForm({ buttonLabel, onSubmit, contactInfo }) {
     phone,
     categoryId,
     categories,
+    categoriesLoading,
     isSubmitting,
     nameError,
     emailError,
@@ -68,7 +69,7 @@ function ContactForm({ buttonLabel, onSubmit, contactInfo }) {
         <Select
           value={categoryId}
           onChange={handleCategoryChange}
-          disabled={isSubmitting}
+          disabled={isSubmitting || categoriesLoading}
         >
           <option value="">Sem categoria</option>
           {categories.map((c) => (
