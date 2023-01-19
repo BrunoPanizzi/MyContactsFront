@@ -14,6 +14,7 @@ import edit from '../../../../assets/images/edit.svg'
 import trash from '../../../../assets/images/trash.svg'
 
 import Modal from '../../../../components/Modal'
+import { useState } from 'react'
 
 function ContactCard({
   id,
@@ -26,7 +27,7 @@ function ContactCard({
 }) {
   const addToast = useToast((store) => store.addToast)
 
-  const [modal, toggleModal] = useToggle(false, true)
+  const [modal, setModal] = useState(false)
 
   const handleDelete = async () => {
     try {
@@ -34,7 +35,7 @@ function ContactCard({
 
       addToast('Contato deletado')
 
-      toggleModal()
+      setModal(false)
       loadContacts()
     } catch {
       addToast('Não foi possivel remover o contato', 'error')
@@ -44,7 +45,7 @@ function ContactCard({
   return (
     <Container>
       <Modal
-        onClose={toggleModal}
+        onClose={() => setModal(false)}
         shouldAppear={modal}
         action={handleDelete}
         danger
@@ -66,7 +67,7 @@ function ContactCard({
           <img src={edit} alt="trash icon" />
         </Link>
 
-        <button onClick={toggleModal}>
+        <button onClick={() => setModal(true)}>
           <img src={trash} alt="trash icon" />
         </button>
       </Icons>

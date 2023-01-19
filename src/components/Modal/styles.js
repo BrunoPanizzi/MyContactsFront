@@ -1,6 +1,17 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const fadeIn = keyframes`
+  from {opacity: 0}
+  to {opacity: 1}
+`
+
+const fadeOut = keyframes`
+  from {opacity: 1}
+  to {opacity: 0}
+`
 
 export const Background = styled.div`
+  --duration: 0.25s;
   position: fixed;
   backdrop-filter: blur(4px);
   inset: 0;
@@ -8,6 +19,13 @@ export const Background = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &.fadeIn {
+    animation: ${fadeIn} var(--duration) forwards;
+  }
+  &.fadeOut {
+    animation: ${fadeOut} var(--duration) forwards;
+  }
 `
 
 export const Container = styled.div`

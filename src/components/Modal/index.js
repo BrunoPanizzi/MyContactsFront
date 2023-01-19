@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types'
 
+import useAnimatedExit from '../../hooks/useAnimatedExit'
+
 import { Background, Container } from './styles'
 
-import FadeInOut from '../FadeInOut'
 import Button from '../Button'
 import Portal from '../Portal'
 
@@ -16,25 +17,33 @@ export default function Modal({
   cancelLabel,
   confirmLabel,
 }) {
+  const [modalRef, { shouldRender }] = useAnimatedExit(shouldAppear)
+
+  if (!shouldRender) {
+    return null
+  }
+
   return (
     <Portal containerId="modal-root">
-      <FadeInOut shouldAppear={shouldAppear}>
-        <Background onClick={onClose}>
-          <Container danger={danger} onClick={(e) => e.stopPropagation()}>
-            <h2>{title}</h2>
-            <p>{content}</p>
+      <Background
+        ref={modalRef}
+        onClick={onClose}
+        className={shouldAppear ? 'fadeIn' : 'fadeOut'}
+      >
+        <Container danger={danger} onClick={(e) => e.stopPropagation()}>
+          <h2>{title}</h2>
+          <p>{content}</p>
 
-            <div className="buttons">
-              <Button onClick={onClose} outline customColor="#555">
-                {cancelLabel}
-              </Button>
-              <Button onClick={action} danger={danger}>
-                {confirmLabel}
-              </Button>
-            </div>
-          </Container>
-        </Background>
-      </FadeInOut>
+          <div className="buttons">
+            <Button onClick={onClose} outline customColor="#555">
+              {cancelLabel}
+            </Button>
+            <Button onClick={action} danger={danger}>
+              {confirmLabel}
+            </Button>
+          </div>
+        </Container>
+      </Background>
     </Portal>
   )
 }

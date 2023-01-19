@@ -20,7 +20,7 @@
     "zustand": "^4.0.0-rc.1"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "serve": "npx serve build",
     "build": "DISABLE_ESLINT_PLUGIN=true react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
