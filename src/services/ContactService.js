@@ -1,9 +1,11 @@
 import HttpClient from './httpClient/HttpClient'
 import ContactMapper from './mappers/ContactMapper'
 
+const baseUrl = process.env['REACT_APP_API_URL'] || 'http://localhost:3001'
+
 class ContactService {
   constructor() {
-    this.httpClient = new HttpClient('http://localhost:3001')
+    this.httpClient = new HttpClient(baseUrl)
   }
 
   async listContacts() {

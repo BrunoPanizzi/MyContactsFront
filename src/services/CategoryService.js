@@ -1,8 +1,10 @@
 import HttpClient from './httpClient/HttpClient'
 
+const baseUrl = process.env['REACT_APP_API_URL'] || 'http://localhost:3001'
+
 class CategoryService {
   constructor() {
-    this.httpClient = new HttpClient('http://localhost:3001')
+    this.httpClient = new HttpClient(baseUrl)
   }
 
   listCategories() {
