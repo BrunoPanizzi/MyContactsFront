@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import formatPhone from '../../../../utils/formatPhone'
-import useToggle from '../../../../hooks/useToggle'
 
 import { useToast } from '../../../../components/Toast/toastStore'
 
