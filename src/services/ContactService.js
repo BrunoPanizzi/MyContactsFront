@@ -1,6 +1,8 @@
 import HttpClient from './httpClient/HttpClient'
 import ContactMapper from './mappers/ContactMapper'
 
+import sleep from '../utils/sleep'
+
 const baseUrl = process.env['REACT_APP_API_URL'] || 'http://localhost:3001'
 
 class ContactService {
@@ -28,8 +30,12 @@ class ContactService {
     return this.httpClient.put(`/contacts/${id}`, data)
   }
 
-  deleteContact(id) {
-    return this.httpClient.delete(`/contacts/${id}`)
+  async deleteContact(id) {
+    const response = await Promise.allSettled([
+      this.httpClient.delete(`/contacts/${id}`),
+      sleep(1000),
+    ])
+    return response[0]
   }
 }
 export default new ContactService()
