@@ -11,7 +11,7 @@ const fadeOut = keyframes`
 `
 
 export const Background = styled.div`
-  --duration: 0.25s;
+  --duration: 0.35s;
   position: fixed;
   backdrop-filter: blur(4px);
   inset: 0;
