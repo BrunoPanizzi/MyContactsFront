@@ -11,6 +11,7 @@ export const useHome = create((set, get) => ({
     contactId: null,
     contactName: null,
     isVisible: false,
+    loading: false,
   },
 
   setContacts(contacts, order) {
@@ -49,12 +50,21 @@ export const useHome = create((set, get) => ({
       ),
     }))
   },
+
   setModal(isVisible, contactInfo) {
     set((state) => ({
       modal: {
         ...state.modal,
         isVisible,
         ...contactInfo,
+      },
+    }))
+  },
+  setModalLoading(loading) {
+    set((state) => ({
+      modal: {
+        ...state.modal,
+        loading,
       },
     }))
   },

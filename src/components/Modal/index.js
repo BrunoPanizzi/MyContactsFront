@@ -14,6 +14,7 @@ export default function Modal({
   title,
   content,
   danger,
+  loading,
   cancelLabel,
   confirmLabel,
 }) {
@@ -38,7 +39,7 @@ export default function Modal({
             <Button onClick={onClose} outline customColor="#555">
               {cancelLabel}
             </Button>
-            <Button onClick={action} danger={danger}>
+            <Button onClick={action} danger={danger} isLoading={loading}>
               {confirmLabel}
             </Button>
           </div>
@@ -55,11 +56,13 @@ Modal.propTypes = {
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   danger: PropTypes.bool,
+  loading: PropTypes.bool,
   cancelLabel: PropTypes.string,
   confirmLabel: PropTypes.string,
 }
 Modal.defaultProps = {
   danger: false,
+  loading: false,
   cancelLabel: 'Cancelar',
   confirmLabel: 'Confirmar',
 }

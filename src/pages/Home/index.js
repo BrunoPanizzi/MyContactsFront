@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from 'react'
+import { toast } from 'react-hot-toast'
 
 import ContactService from '../../services/ContactService'
 
@@ -7,16 +8,17 @@ import { useHome } from './homeStore'
 import Modal from '../../components/Modal'
 import ListHeader from './components/ListHeader'
 import List from './components/List'
-import { toast } from 'react-hot-toast'
 
 function Home() {
-  const [setError, setContacts, setLoading, modal, setModal] = useHome((s) => [
-    s.setError,
-    s.setContacts,
-    s.setLoading,
-    s.modal,
-    s.setModal,
-  ])
+  const [setError, setContacts, setLoading, modal, setModal, setModalLoading] =
+    useHome((s) => [
+      s.setError,
+      s.setContacts,
+      s.setLoading,
+      s.modal,
+      s.setModal,
+      s.setModalLoading,
+    ])
 
   const load = useCallback(async () => {
     setError(false)
@@ -35,6 +37,7 @@ function Home() {
   const handleDelete = useCallback(
     async (id) => {
       try {
+        setModalLoading(true)
         await ContactService.deleteContact(id)
 
         toast.success('Contato deletado')
@@ -43,6 +46,8 @@ function Home() {
         load()
       } catch {
         toast.error('Não foi possivel remover o contato')
+      } finally {
+        setModalLoading(false)
       }
     },
     [setContacts, setError, setLoading]
@@ -64,6 +69,7 @@ function Home() {
         title={`Você realmente deseja excluir ${modal.contactName}?`}
         content="Essa ação não pode ser desfeita."
         confirmLabel="Excluir"
+        loading={modal.loading}
       />
     </>
   )
