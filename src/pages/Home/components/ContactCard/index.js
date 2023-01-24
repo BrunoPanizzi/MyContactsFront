@@ -3,55 +3,25 @@ import PropTypes from 'prop-types'
 
 import formatPhone from '../../../../utils/formatPhone'
 
-import { useToast } from '../../../../components/Toast/toastStore'
-
-import ContactService from '../../../../services/ContactService'
-
 import { Container, Info, Icons } from './styles'
 
 import edit from '../../../../assets/images/edit.svg'
 import trash from '../../../../assets/images/trash.svg'
 
-import Modal from '../../../../components/Modal'
-import { useState } from 'react'
+import { useHome } from '../../homeStore'
 
-function ContactCard({
-  id,
-  name,
-  email,
-  phone,
-  categoryId,
-  categoryName,
-  loadContacts,
-}) {
-  const addToast = useToast((store) => store.addToast)
+function ContactCard({ id, name, email, phone, categoryId, categoryName }) {
+  const setModal = useHome((s) => s.setModal)
 
-  const [modal, setModal] = useState(false)
-
-  const handleDelete = async () => {
-    try {
-      await ContactService.deleteContact(id)
-
-      addToast('Contato deletado')
-
-      setModal(false)
-      loadContacts()
-    } catch {
-      addToast('Não foi possivel remover o contato', 'error')
-    }
+  const handleOpenModal = () => {
+    setModal(true, {
+      contactId: id,
+      contactName: name,
+    })
   }
 
   return (
     <Container>
-      <Modal
-        onClose={() => setModal(false)}
-        shouldAppear={modal}
-        action={handleDelete}
-        danger
-        title={`Você realmente deseja excluir ${name}?`}
-        content="Essa ação não pode ser desfeita."
-        confirmLabel="Excluir"
-      />
       <Info>
         <div>
           <h2>{name}</h2>
@@ -66,7 +36,7 @@ function ContactCard({
           <img src={edit} alt="trash icon" />
         </Link>
 
-        <button onClick={() => setModal(true)}>
+        <button onClick={handleOpenModal}>
           <img src={trash} alt="trash icon" />
         </button>
       </Icons>

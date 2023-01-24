@@ -1,4 +1,4 @@
-import create from 'zustand'
+import { create } from 'zustand'
 
 export const useHome = create((set, get) => ({
   contacts: [],
@@ -7,6 +7,11 @@ export const useHome = create((set, get) => ({
   loading: false,
   order: 'ascending',
   search: '',
+  modal: {
+    contactId: null,
+    contactName: null,
+    isVisible: false,
+  },
 
   setContacts(contacts, order) {
     const Order = order ?? get().order // weird but here to ensure that the contacts are sorted right
@@ -42,6 +47,15 @@ export const useHome = create((set, get) => ({
       filteredContacts: state.contacts.filter((contact) =>
         contact.name.toLowerCase().includes(search.trim().toLowerCase())
       ),
+    }))
+  },
+  setModal(isVisible, contactInfo) {
+    set((state) => ({
+      modal: {
+        ...state.modal,
+        isVisible,
+        ...contactInfo,
+      },
     }))
   },
 }))
