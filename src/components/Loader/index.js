@@ -1,12 +1,12 @@
 import { Container, Bounce } from './styles'
 
-function Loader() {
+function Loader(props) {
   return (
     <Container>
-      <Bounce delay='.2s' />
-      <Bounce delay='.4s' />
-      <Bounce delay='.6s' />
-      <Bounce delay='.8s' />
+      <Bounce delay=".2s" {...props} />
+      <Bounce delay=".4s" {...props} />
+      <Bounce delay=".6s" {...props} />
+      <Bounce delay=".8s" {...props} />
     </Container>
   )
 }

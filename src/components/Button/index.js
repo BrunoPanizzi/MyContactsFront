@@ -28,7 +28,7 @@ function Button({
       }}
     >
       {!isLoading && children}
-      {isLoading && <Loader />}
+      {isLoading && <Loader danger={danger} />}
     </Container>
   )
 }
