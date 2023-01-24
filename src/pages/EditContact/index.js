@@ -3,15 +3,12 @@ import { useParams, useHistory } from 'react-router-dom'
 
 import ContactService from '../../services/ContactService'
 
-import { useToast } from '../../components/Toast/toastStore'
-
 import ContactForm from '../../components/ContactForm'
 import Loader from '../../components/Loader'
 import PageHeader from '../../components/PageHeader'
+import { toast } from 'react-hot-toast'
 
 function EditContact() {
-  const toast = useToast((state) => state.addToast)
-
   const [isLoading, setIsLoading] = useState(true)
   const [contact, setContact] = useState()
 
@@ -24,10 +21,10 @@ function EditContact() {
 
       setContact(response)
 
-      toast('Contato editado')
+      toast.success('Contato editado')
     } catch (e) {
       console.log(e)
-      toast('Algo deu errado', 'error')
+      toast.error('Algo deu errado')
     }
   }
 

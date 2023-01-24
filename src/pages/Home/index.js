@@ -2,16 +2,14 @@ import { useEffect, useCallback } from 'react'
 
 import ContactService from '../../services/ContactService'
 
-import { useToast } from '../../components/Toast/toastStore'
-
 import { useHome } from './homeStore'
 
 import Modal from '../../components/Modal'
 import ListHeader from './components/ListHeader'
 import List from './components/List'
+import { toast } from 'react-hot-toast'
 
 function Home() {
-  const addToast = useToast((s) => s.addToast)
   const [setError, setContacts, setLoading, modal, setModal] = useHome((s) => [
     s.setError,
     s.setContacts,
@@ -39,12 +37,12 @@ function Home() {
       try {
         await ContactService.deleteContact(id)
 
-        addToast('Contato deletado')
+        toast.success('Contato deletado')
 
         setModal(false)
         load()
       } catch {
-        addToast('Não foi possivel remover o contato', 'error')
+        toast.error('Não foi possivel remover o contato')
       }
     },
     [setContacts, setError, setLoading]
