@@ -5,6 +5,7 @@ export default styled.select`
   height: 3rem;
   padding: 0 1rem;
   margin-bottom: 1rem;
+  color: ${({ theme }) => theme.text.main};
   background: ${({ theme }) => theme.colors.veryLight};
   border: 2px solid ${({ theme }) => theme.colors.veryLight};
   outline: none;
@@ -22,9 +23,9 @@ export default styled.select`
   }
 
   &[disabled] {
-    background: #eee;
-    border-color: #ddd;
+    background: #777;
+    opacity: 0.5;
+    border-color: #888;
     box-shadow: none;
-    opacity: 1;
   }
 `

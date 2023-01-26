@@ -39,7 +39,6 @@ export const Flex = styled.div`
 
   a {
     font-size: 1.1rem;
-    background: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.primary.main};
     border: 2px solid ${({ theme }) => theme.colors.primary.main};
     border-radius: ${({ theme }) => theme.borderRadius};
@@ -61,7 +60,6 @@ export const ListOrderButton = styled.button`
   display: flex;
   align-self: flex-start;
   font-size: 1rem;
-  background: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.primary.main};
 
   img {

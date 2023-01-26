@@ -33,7 +33,7 @@ class ContactService {
   async deleteContact(id) {
     const response = await Promise.allSettled([
       this.httpClient.delete(`/contacts/${id}`),
-      sleep(1000),
+      sleep(800),
     ])
     return response[0]
   }

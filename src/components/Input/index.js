@@ -6,6 +6,7 @@ const Input = styled.input`
   width: 100%;
   height: 3rem;
   padding: 0 1rem;
+  color: ${({ theme }) => theme.text.main};
   background: ${({ theme }) => theme.colors.veryLight};
   border: 2px solid ${({ theme }) => theme.colors.veryLight};
   outline: none;

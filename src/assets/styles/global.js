@@ -11,12 +11,13 @@ export default createGlobalStyle`
 
 	body {
 		color: ${({ theme }) => theme.text.main};
-		background: ${({ theme }) => theme.colors.background};
+		background-color: ${({ theme }) => theme.colors.background};
+    transition:color 0.6s, background-color 0.5s ;
 	}
 
 	button, a {
 		cursor: pointer;
 		border: none;
-		background-color: ${({ theme }) => theme.colors.background};
+    background-color: transparent;
 	}
 `

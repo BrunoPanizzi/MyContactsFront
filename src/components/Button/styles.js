@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components'
 
 const variants = {
   disabled: css`
-    --main-color: #aaa;
+    --main-color: #777;
+    opacity: 0.7;
     cursor: not-allowed;
   `,
   danger: css`
